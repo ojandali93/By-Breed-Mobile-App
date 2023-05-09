@@ -36,6 +36,74 @@ export default function App() {
     )
   }
 
+  const displayCatAttributes = (breed) => {
+    let catInfo = data.cat_breeds[breed]
+    let catInfoKeys = Object.keys(data.cat_breeds[breed])
+    // console.log(catInfo)
+    console.log(catInfoKeys)
+    return(
+      <>
+        {
+          catInfoKeys.map((item) => {
+            return(
+              <View style={styles.attributeContainer}>
+                <Text>{item} | {catInfo[item]}</Text>
+                <View>
+                  {
+                    catInfo[item] === 5 
+                    ? <View style={styles.ratingContainer}><Text>&#11088;</Text><Text>&#11088;</Text><Text>&#11088;</Text><Text>&#11088;</Text><Text>&#11088;</Text></View>
+                    : catInfo[item] === 4
+                      ? <View style={styles.ratingContainer}><Text>&#11088;</Text><Text>&#11088;</Text><Text>&#11088;</Text><Text>&#11088;</Text></View>
+                      : catInfo[item] === 3 
+                        ? <View style={styles.ratingContainer}><Text>&#11088;</Text><Text>&#11088;</Text><Text>&#11088;</Text></View>
+                        : catInfo[item] === 2
+                          ? <View style={styles.ratingContainer}><Text>&#11088;</Text><Text>&#11088;</Text></View>
+                            : catInfo[item] === 1
+                              ? <View style={styles.ratingContainer}><Text>&#11088;</Text></View>
+                              : null
+                  }
+                </View>
+              </View>
+            )
+          })
+        }
+      </>
+    )
+  }
+
+  const displayDogAttributes = (breed) => {
+    let dogInfo = data.dog_breeds[breed]
+    let dogInfoKeys = Object.keys(data.dog_breeds[breed])
+    return(
+      <>
+        {
+          dogInfoKeys.map((item) => {
+            return(
+              <View style={styles.attributeContainer}>
+                <Text>{item} | {dogInfo[item]}</Text>
+                <View>
+                  {
+                    dogInfo[item] === 5 
+                    ? <View style={styles.ratingContainer}><Text>&#11088;</Text><Text>&#11088;</Text><Text>&#11088;</Text><Text>&#11088;</Text><Text>&#11088;</Text></View>
+                    : dogInfo[item] === 4
+                      ? <View style={styles.ratingContainer}><Text>&#11088;</Text><Text>&#11088;</Text><Text>&#11088;</Text><Text>&#11088;</Text></View>
+                      : dogInfo[item] === 3 
+                        ? <View style={styles.ratingContainer}><Text>&#11088;</Text><Text>&#11088;</Text><Text>&#11088;</Text></View>
+                        : dogInfo[item] === 2
+                          ? <View style={styles.ratingContainer}><Text>&#11088;</Text><Text>&#11088;</Text></View>
+                            : dogInfo[item] === 1
+                              ? <View style={styles.ratingContainer}><Text>&#11088;</Text></View>
+                              : null
+                  }
+                </View>
+              </View>
+            )
+          })
+        }
+      </>
+    )
+  }
+
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
@@ -57,9 +125,7 @@ export default function App() {
                     <Text style={styles.itemBreed}>
                       {item.item}
                     </Text>
-                    <Text  style={styles.itemCount}>
-                      {item.index}
-                    </Text>
+                    {displayCatAttributes(item.item)}
                   </View>)
               }}
             />
@@ -68,13 +134,11 @@ export default function App() {
               keyExtractor={(item) => {item.item}}
               renderItem={(item) => {
                 return(
-                  <View>
+                  <View  style={styles.item}>
                     <Text style={styles.itemBreed}>
                       {item.item}
                     </Text>
-                    <Text  style={styles.itemCount}>
-                      {item.index}
-                    </Text>
+                    {displayDogAttributes(item.item)}
                   </View>)
               }}
             />
@@ -121,5 +185,15 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     borderBottomColor: 'black',
     borderBottomWidth: 2
+  },
+  attributeContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingVertical: 4
+  },
+  ratingContainer: {
+    display: 'flex',
+    flexDirection: 'row'
   }
 });
